@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Speak-AI Multilingual Voice System
 Overview :-
 
@@ -152,3 +153,7 @@ Aditya Singh Tomar
 
 This project is not just about converting text to speech —
 it is about making speech sound natural, accurate, and accessible across languages.
+=======
+# SpeakAI-Multilingual-Voice-Engine
+A real-time multilingual speech-to-speech system that captures voice input, detects language, translates it across multiple languages, and generates natural-sounding speech using advanced XTTS models. Built to enhance Speak-AI with scalable, high-quality pronunciation and multilingual support.
+>>>>>>> 71a36dda87e7285893c55fe117fdbbee66c1a8d9

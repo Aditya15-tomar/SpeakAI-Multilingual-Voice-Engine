@@ -4,31 +4,31 @@ from deep_translator import GoogleTranslator
 import os
 import time
 
-# 🎤 Initialize
+#  Initialize
 r = sr.Recognizer()
 
-# 📁 Base output folder
+#  Base output folder
 BASE_DIR = "output"
 os.makedirs(BASE_DIR, exist_ok=True)
 
-# 🎤 Take speech input
+#  Take speech input
 with sr.Microphone() as source:
-    print("🎤 Speak...")
+    print(" Speak...")
     audio = r.listen(source)
 
-# 🔤 Speech to text
+#  Speech to text
 try:
     text = r.recognize_google(audio)
-    print("🗣 You said:", text)
+    print(" You said:", text)
 except Exception as e:
-    print("❌ Could not understand audio:", e)
+    print(" Could not understand audio:", e)
     exit()
 
-# 🌍 Language detection (simple fallback)
+#  Language detection (simple fallback)
 detected_lang = "en"
-print("🌍 Detected language:", detected_lang)
+print(" Detected language:", detected_lang)
 
-# 🔧 Language mappings
+#  Language mappings
 TRANSLATE_LANG_MAP = {
     "hi": "hi",
     "fr": "fr",
@@ -49,7 +49,7 @@ TTS_LANG_MAP = {
     "ja": "ja"
 }
 
-# 📁 Language full names (for folders)
+#  Language full names (for folders)
 LANG_NAME = {
     "hi": "hindi",
     "fr": "french",
@@ -60,7 +60,7 @@ LANG_NAME = {
     "ja": "japanese"
 }
 
-# 🎯 Mode selection
+#  Mode selection
 mode = input("Mode (auto / translate / multi): ").strip().lower()
 
 if mode == "auto":
@@ -77,14 +77,14 @@ else:
     print("⚠ Invalid mode, using multi")
     target_languages = ["hi", "fr", "es", "ar", "zh", "de", "ja"]
 
-# 🔊 Load TTS model once
-print("🔄 Loading TTS model...")
+#  Load TTS model once
+print(" Loading TTS model...")
 tts = TTS(model_name="tts_models/multilingual/multi-dataset/xtts_v2")
 
-# 🔁 Process languages
+#  Process languages
 for lang in target_languages:
     try:
-        print(f"\n🌍 Translating to {lang}...")
+        print(f"\n Translating to {lang}...")
 
         translated_text = GoogleTranslator(
             source='auto',
@@ -94,19 +94,19 @@ for lang in target_languages:
         print("➡ Translated:", translated_text)
 
     except Exception as e:
-        print(f"❌ Translation failed for {lang}:", e)
+        print(f" Translation failed for {lang}:", e)
         continue
 
-    # 📁 Create language folder
+    #  Create language folder
     lang_folder = os.path.join(BASE_DIR, LANG_NAME.get(lang, lang))
     os.makedirs(lang_folder, exist_ok=True)
 
-    # 📄 Clean filename
+    #  Clean filename
     filename = f"{LANG_NAME.get(lang, lang)}.wav"
     filepath = os.path.join(lang_folder, filename)
 
     if os.path.exists(filepath):
-        print(f"⚡ Cached audio used for {lang}")
+        print(f" Cached audio used for {lang}")
         continue
 
     try:
@@ -121,10 +121,10 @@ for lang in target_languages:
 
         end = time.time()
 
-        print(f"✅ {lang} audio saved → {filepath}")
-        print(f"⏱ Time: {round(end - start, 2)} sec")
+        print(f" {lang} audio saved → {filepath}")
+        print(f" Time: {round(end - start, 2)} sec")
 
     except Exception as e:
-        print(f"❌ TTS failed for {lang}:", e)
+        print(f" TTS failed for {lang}:", e)
 
-print("\n🎉 All done! Check 'output/' folder.")
+print("\n All Transations done! Check 'output/' folder.")
